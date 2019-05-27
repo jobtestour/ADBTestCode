@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     SwipeRefreshLayout pullToRefresh;
     ProgressBar progressBarSubject;
     String ServerURL = "https://jsonplaceholder.typicode.com/users/";
+    String SaveName="CacheJson";
     ArrayList<String> UserInfoArrayList = new ArrayList<String>();
     String GlobalString,UserName,Email,Street,Suite,City,ZipCode,Phone,Website,CompagnyName,catchPhrase,Bs,StringLat,StringLng;
 
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         new JsonTask().execute(ServerURL);
     }
 
+
+/**Create scene : Manage all scene elements : PullToRefresh, List view, Button etc **/
 
     private void CreateScene()
     {
@@ -126,6 +129,9 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
+
+
+    /**CreateMap : Init Google Map**/
     private void CreateMap()
     {
 
@@ -135,6 +141,9 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         mapFragment.getMapAsync(MainActivity.this);
     }
 
+
+    /**Jsontask : Read Online Json peut it into a textFile and Save it locally to use it later
+     * NB: For this exemple i didn't manage possible arrors (exept try cactch)**/
 
     private class JsonTask extends AsyncTask<String, String, String> {
 
@@ -211,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
+    /**Refraichlistview : simple code to give to the list view every name to display it**/
     private void Refraichlistview(String JsonResult)
     {
 
@@ -218,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         Parsedata(JsonResult);
         //save file in a cache
 
-        CacheJson.writeToFile(getApplicationContext(),"CacheJson",JsonResult);
+        CacheJson.writeToFile(getApplicationContext(),SaveName,JsonResult);
 
 
       ListAdapterClass adapter = new ListAdapterClass(MainActivity.this,UserInfoArrayList);
@@ -230,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
+    /**Parsedata : get every names and put them in an array (this array will be use with the list view**/
     private void Parsedata(String JsonData)
     {
 
@@ -257,13 +268,16 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     }
 
+
+
+    /**AssignData : get every Data we need to display suer info these data are read from the previously saved cache data
+     * For this exemple i didn't manage possible arrors (exept try cactch)**/
     private void AssignData(int Id)
     {
 
-        //GlobalString,Name,UserName,Email,Street,Suit,City,Phone,Website,CompagnyName,catchPhrase,Bs;
         try {
 
-        String JsonFile=ReadJson.JsonReader(getApplicationContext(),"CacheJson");
+        String JsonFile=ReadJson.JsonReader(getApplicationContext(),SaveName);
 
         JSONArray   jsonObj = new JSONArray(JsonFile);
 
@@ -310,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     }
 
-
+    /**DisplayInfo & BackToList: UI Navigation between 2 screens**/
     private void DisplayInfo()
     {
 
@@ -335,6 +349,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
+    /**manage button back**/
+
     @Override
     public void onClick(final View v) {
 
@@ -351,6 +367,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
 
 
+    /**onMapReady Init map, i catch google map here to get control after**/
 
     public void onMapReady(GoogleMap googleMap) {
 
@@ -359,6 +376,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
+    /**RefraichLocation : here i ... refresh user's location on map**/
     void RefraichLocation()
     {
 
