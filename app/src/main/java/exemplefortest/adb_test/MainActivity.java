@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     /**CreateMap : Init Google Map**/
     private void CreateMap()
     {
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
@@ -142,8 +141,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
-    /**Jsontask : Read Online Json peut it into a textFile and Save it locally to use it later
-     * NB: For this exemple i didn't manage possible arrors (exept try cactch)**/
+    /**Jsontask : Read Online Json put it into a textFile and Save it locally to use it later
+     * NB: For this example i didn't manage possible errors (except try catch)**/
 
     private class JsonTask extends AsyncTask<String, String, String> {
 
@@ -220,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
-    /**Refraichlistview : simple code to give to the list view every name to display it**/
+    /**Refraichlistview : simple code to give to the list view every names in order to display it**/
     private void Refraichlistview(String JsonResult)
     {
 
@@ -270,8 +269,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
 
 
-    /**AssignData : get every Data we need to display suer info these data are read from the previously saved cache data
-     * For this exemple i didn't manage possible arrors (exept try cactch)**/
+    /**AssignData : Get every Data we need to display user info these data are read from the previously saved cache data
+     * For this example i didn't manage possible errors (except try catch)**/
     private void AssignData(int Id)
     {
 
