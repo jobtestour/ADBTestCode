@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ADB-Test</string>
+    <string name="InfoTxt">%1$s</string>
+    <string name="google_maps_key"></string>
+</resources>
